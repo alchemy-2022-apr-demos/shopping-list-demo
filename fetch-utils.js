@@ -47,3 +47,13 @@ export async function createListItem(name, qty) {
         return response.data;
     }
 }
+
+export async function fetchListItems() {
+    const response = await client.from('shopping_items').select('*');
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
