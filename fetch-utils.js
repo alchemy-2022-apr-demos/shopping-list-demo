@@ -38,6 +38,12 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+export async function createListItem(name, qty) {
+    const response = await client.from('shopping_items').insert({ name, qty }); // because of RLS and our default values, we add user_id for free
+
+    if (response.error) {
+        console.error(response.error.message);
+    } else {
+        return response.data;
+    }
+}
